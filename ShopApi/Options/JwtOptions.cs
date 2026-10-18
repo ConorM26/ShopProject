@@ -1,0 +1,19 @@
+﻿
+using System.ComponentModel.DataAnnotations;
+
+namespace ShopApi.Options;
+
+public class JwtOptions
+{
+    public const string SectionName = "Jwt";
+
+    [Required]
+    public string Issuer { get; set; } = string.Empty;
+
+    [Required]
+    public string Audience { get; set; } = string.Empty;
+
+    // HMAC-SHA256 needs a key of at least 32 bytes
+    [Required, MinLength(32)]
+    public string SigningKey { get; set; } = string.Empty;
+}

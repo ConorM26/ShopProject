@@ -1,0 +1,45 @@
+
+@ShopApi_HostAddress = https://localhost:7001
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJTaG9wQXBpIiwiaXNzIjoiU2hvcFdlYiIsImV4cCI6MTc5MTk5NDc4OSwiaWF0IjoxNzkxOTkxMTg5LCJuYmYiOjE3OTE5OTExODksInN1YiI6IjdiNzBiMWY3LWZkOWQtNDlhNS1iOGFjLTEyZDE0NDQxYjc5NiIsIm5hbWUiOiJjb25vcm1vZmZhdDg2QGdtYWlsLmNvbSIsImVtYWlsIjoiY29ub3Jtb2ZmYXQ4NkBnbWFpbC5jb20iLCJqdGkiOiI5ZGI1YzhlOC1kMDEzLTRhMGUtYmNjZS1kMjEwOTk4MWQ3MDkifQ.-dKLqFL_Jl_KGQdV2iZL3HR2pwDmS6ebr4SjOirW5rM
+
+### Public: list items
+GET {{ShopApi_HostAddress}}/api/items
+Accept: application/json
+
+### Protected without a token: expect 401
+GET {{ShopApi_HostAddress}}/api/orders
+Accept: application/json
+
+
+### My orders
+GET {{ShopApi_HostAddress}}/api/orders
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Place an order: prices come from the server
+POST {{ShopApi_HostAddress}}/api/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "lines": [
+    { "itemId": 1, "quantity": 1 },
+    { "itemId": 2, "quantity": 2 }
+  ]
+}
+
+### Too many: expect 400 with a stock message
+POST {{ShopApi_HostAddress}}/api/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "lines": [
+    { "itemId": 3, "quantity": 999 }
+  ]
+}
+
+### One order (404 if it belongs to another user)
+GET {{ShopApi_HostAddress}}/api/orders/1
+Accept: application/json
+Authorization: Bearer {{token}}

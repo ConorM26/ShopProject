@@ -1,0 +1,30 @@
+
+# .NET build files
+**/bin/
+**/obj/
+
+# Visual Studio and VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Local configuration and secrets
+**/appsettings.Development.json
+**/secrets.json
+.env
+.env.*
+**/Properties/PublishProfiles/
+
+# macOS
+.DS_Store
+
+# Log files
+*.log

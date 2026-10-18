@@ -1,0 +1,46 @@
+﻿
+@model ShopWeb.Models.Shop.ItemDto
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-action="Index">Items</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            @Model.Name
+        </li>
+    </ol>
+</nav>
+
+<h1>@Model.Name</h1>
+
+<p class="fs-3 fw-semibold">@Model.Price.ToString("C")</p>
+
+<p>@Model.Description</p>
+
+
+<dl class="row">
+    <dt class="col-sm-3">Item ID</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+
+    <dt class="col-sm-3">In stock</dt>
+    <dd class="col-sm-9">@Model.StockQuantity</dd>
+</dl>
+
+@if (Model.StockQuantity > 0)
+{
+    <a asp-controller="Orders"
+       asp-action="Create"
+       asp-route-itemId="@Model.Id"
+       class="btn btn-primary">
+        Order this item
+    </a>
+}
+
+<a asp-action="Index" class="btn btn-secondary">
+    Back to items
+</a>

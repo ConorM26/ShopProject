@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Shop unavailable";
+}
+
+<div class="alert alert-warning mt-4">
+    <h4 class="alert-heading">The shop is temporarily unavailable</h4>
+
+    <p class="mb-0">
+        We couldn't reach the Shop API. Please try again in a moment.
+    </p>
+</div>
+
+<a href="@Context.Request.Path@Context.Request.QueryString"
+   class="btn btn-primary">
+    Try again
+</a>
